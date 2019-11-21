@@ -1,0 +1,43 @@
+<div class="sidebar" id="sidebar" *ngIf="isLoggedIn$ | async as isLoggedIn">
+  <div class="sidebar-inner slimscroll-wrap" slimScroll [options]="slimScrollOptions">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <div class="text-center user-info m-t-10 m-b-5">
+          <div class="user-img">
+            <img class="img-circle" src="assets/img/user-06.jpg" width="100" alt="Admin">
+          </div>
+          <div class="m-t-10 user-name"><h4>{{username$ | async}}</h4></div>
+      </div>
+      
+      <ul>
+        <li [ngClass]="[url === 'dashboard'? 'active' : 'inactive',url === ''? 'active' : 'inactive']">
+          <a routerLink="dashboard"><i class="fa fa-dashboard"></i> <span> Dashboard </span></a>
+        </li>
+        <li class="submenu">
+          <a [ngClass]="url === 'employees'? 'subdrop' : 'null'"><i class="fa fa-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
+          <ul class="list-unstyled" [ngClass]="url === 'employees'? 'submenu-block' : 'dsply-none'">
+            <li><a routerLink="employees/all-employees" [ngClass]="url2 === 'all-employees'? 'active' : 'null'">All Employees</a></li>
+            <li><a routerLink="employees/attendance" [ngClass]="url2 === 'attendance'? 'active' : 'null'">Attendance</a></li>
+          </ul>
+        </li>
+        <li [ngClass]="url === 'projects'? 'active' : 'null'">
+          <a routerLink="projects"><i class="fa fa-rocket"></i> <span> Projects </span> </a>
+        </li>
+        <li class="submenu">
+          <a [ngClass]="url === 'reports'? 'subdrop' : 'null'"><i class="fa fa-user"></i> <span> Reports</span> <span class="menu-arrow"></span></a>
+          <ul class="list-unstyled" [ngClass]="url === 'reports'? 'submenu-block' : 'dsply-none'">
+            <li><a routerLink="reports/pay-out" [ngClass]="url2 === 'pay-out'? 'active' : 'null'">Pay Out</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a [ngClass]="url === 'masters'? 'subdrop' : 'null'"><i class="fa fa-user"></i> <span> Masters</span> <span class="menu-arrow"></span></a>
+          <ul class="list-unstyled" [ngClass]="url === 'masters'? 'submenu-block' : 'dsply-none'">
+            <li><a routerLink="masters/employee-category" [ngClass]="url2 === 'employee-category'? 'active' : 'null'">Employee Category</a></li>
+            <li><a routerLink="masters/project-category" [ngClass]="url2 === 'project-category'? 'active' : 'null'">Project Category</a></li>
+          </ul>
+        </li>
+      </ul>      
+    </div>
+    <div class="cover-bar"></div>
+  </div>
+</div>
+

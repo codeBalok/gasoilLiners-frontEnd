@@ -1,0 +1,160 @@
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="row">
+      <div class="col-xs-4">
+        <h4 class="page-title">Employees</h4>
+      </div>
+      <div class="col-xs-8 text-right mb-30">
+        <a href="javascript:" class="btn btn-primary rounded pull-right" data-toggle="modal"
+          data-target="#add_employee">
+          <i class="fa fa-plus"></i>
+          Add Employee
+        </a>
+      </div>
+    </div>
+    <div class="row staff-grid-row">
+      <div class="col-md-4 col-sm-4 col-xs-6 col-lg-3" *ngFor="let emp of rows">
+        <div class="profile-widget" (click)="employeeDetails(emp.id)" title="Click to view employee details">
+          <div class="profile-img">
+            <a><img class="avatar" src="assets/img/user.jpg" alt="_photo" /></a>
+          </div>
+          <h4 class="user-name m-t-10 m-b-15 text-ellipsis">
+            <a class="text-primary">{{emp.name}}</a>
+          </h4>
+          <div class="m-b-15">
+            <span class="title">Employee Number : </span>
+            <span class="text">{{emp.employeeNumber}}</span>
+          </div>
+          <div class="m-b-15">
+            <span class="title">Designation : </span>
+            <span class="text">{{emp.categoryNavigation.category}}</span>
+          </div>
+          <div class="m-b-15">
+            <span class="title">Project : </span>
+            <span class="text" *ngFor="let prjEmp of emp.projectEmployee">{{prjEmp.project.title}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="add_employee" class="modal custom-modal fade" role="dialog">
+      <div class="modal-dialog">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal-content modal-lg">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Employee</h4>
+          </div>
+          <div class="modal-body">
+            <form #addEmpForm="ngForm" (ngSubmit)="addEmployee(addEmpForm.form)" validate>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Employee Number</label>
+                    <input class="form-control" type="text" [(ngModel)]="employee.EmployeeNumber" name="EmployeeNumber"
+                      #EmployeeNumber="ngModel">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Project Name</label>
+                    <select class="select form-control" [(ngModel)]="employee.Project.Id" name="Project"
+                      #Project="ngModel">
+                      <option *ngFor="let pc of projects" [ngValue]="pc.id">{{pc.title}} ({{pc.code}})</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input class="form-control" type="text" [(ngModel)]="employee.Name" name="Name" #Name="ngModel">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Age</label>
+                    <input class="form-control" type="number" [(ngModel)]="employee.Age" name="Age" #Age="ngModel">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Position</label>
+                    <select class="select form-control" [(ngModel)]="employee.Category.Id" name="Category"
+                      #Category="ngModel">
+                      <option *ngFor="let item of categories" [ngValue]="item.id">{{item.category}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Phone</label>
+                    <input class="form-control" type="text" [(ngModel)]="employee.Phone" name="Phone" #Phone="ngModel">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Joining Date</label>
+                    <my-date-picker name="StartDate" [options]="myDatePickerOptions" [(ngModel)]="employee.StartDate"
+                      #StartDate='ngModel'></my-date-picker>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Finishing Date</label>
+                    <my-date-picker name="FinishDate" [options]="myDatePickerOptions" [(ngModel)]="employee.FinishDate"
+                      #FinishDate='ngModel'></my-date-picker>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Approx Salary</label>
+                    <input class="form-control" type="text" [(ngModel)]="employee.Salary" name="Salary"
+                      #Salary="ngModel">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Experience with GasOil Liners</label>
+                    <input class="form-control" type="text" [(ngModel)]="employee.Experience" name="Experience"
+                      #Experience="ngModel">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Address</label>
+                    <textarea rows="4" cols="5" class="form-control summernote" placeholder="Address"
+                      [(ngModel)]="employee.Address" name="Address" Address="ngModel"></textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Notes</label>
+                    <textarea rows="4" cols="5" class="form-control summernote" placeholder="Notes"
+                      [(ngModel)]="employee.Notes" name="Notes" Notes="ngModel"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="m-t-20 text-center">
+                <button class="btn btn-primary" type="submit">Add Employee</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

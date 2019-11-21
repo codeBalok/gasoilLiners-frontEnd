@@ -1,0 +1,344 @@
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+        <h4 class="page-title">Employee Details</h4>
+      </div>
+    </div>
+
+    <div class="card-box m-b-0">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="profile-view">
+              <div class="profile-img-wrap">
+                <div class="profile-img">
+                  <a href="javascript:"><img class="avatar" src="assets/img/user.jpg" alt=""></a>
+                </div>
+              </div>
+              <div class="profile-basic">
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="profile-info-left">
+                      <h3 class="user-name m-t-0 m-b-0">{{employee.name}}</h3>
+                      <small class="text-muted">{{employee.categoryNavigation.category}}</small>
+                      <div class="staff-id">Employee ID : {{employee.employeeNumber}}</div>
+                      <div class="personal-info m-b-5 m-t-5">
+                        <span class="title">Date of joining : </span>
+                        <span class="text">{{employee.startDate | parseDate}}</span>
+                      </div>
+                      <div class="personal-info m-b-5 m-t-5">
+                        <span class="title">Date of leave: </span>
+                        <span class="text">{{employee.endDate | parseDate}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7">
+                    <ul class="personal-info">
+                      <li>
+                        <span class="title">Phone:</span>
+                        <span class="text"><a href="javascript:">{{employee.phone}}</a></span>
+                      </li>
+                      <li>
+                        <span class="title">Email:</span>
+                        <span class="text"><a href="javascript:">{{employee.email}}</a></span>
+                      </li>
+                      <li>
+                        <span class="title">Birthday:</span>
+                        <span class="text">{{employee.dateOfBirth | parseDate}}</span>
+                      </li>
+                      <li>
+                        <span class="title">Address:</span>
+                        <span class="text">{{employee.address}}</span>
+                      </li>
+                      <li>
+                        <span class="title">Start Date:</span>
+                        <span class="text">{{employee.startDate | parseDate}}</span>
+                      </li>
+                      <li>
+                        <span class="title">End Date:</span>
+                        <span class="text">{{employee.endDate | parseDate}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-box tab-box m-b-10">
+      <div class="row user-tabs">
+        <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
+          <ul class="nav nav-tabs nav-tabs-bottom">
+            <li class="nav-item active"><a href="#emp_projects" data-toggle="tab" class="nav-link active">Projects</a></li>
+            <li class="nav-item" (click) = "getAttendance(employeeId)"><a href="#emp_attendance" data-toggle="tab" class="nav-link">Attendance</a></li>
+            <li class="nav-item"><a href="#emp_earning" data-toggle="tab" class="nav-link">Earnings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div id="emp_projects" class="pro-overview tab-pane fade active in">
+        <div class="row">
+          <div class="col-lg-3 col-sm-4" *ngFor="let item of projects">
+            <div class="card-box project-box">
+              <h4 class="project-title"><a>{{item.title}}</a></h4>
+              <p class="text-muted">{{item.description}}...
+              </p>
+              <div class="pro-deadline m-b-15">
+                <div class="sub-title">
+                  Deadline:
+                </div>
+                <div class="text-muted">
+                  {{item.endDate | parseDate}}
+                </div>
+              </div>
+              <div class="pro-deadline m-b-15">
+                <div class="sub-title">
+                  Category:
+                </div>
+                <div class="text-muted">
+                  {{item.projectCategoryNavigation.name}}
+                </div>
+              </div>
+              <div class="pro-deadline m-b-15">
+                <div class="sub-title">
+                  Employee Count:
+                </div>
+                <div class="text-muted">
+                  {{item.projectEmployee.length}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="emp_attendance" class="tab-pane fade">
+        <div class="row">
+          <div class="col-lg-3 col-sm-4">
+            <div class="card-box">
+              <h5 class="card-title">Today</h5>
+              <div class="card-body">
+                --
+              </div>
+            </div>
+
+            <div class="card-box">
+              <h5 class="card-title">Total work days</h5>
+              <div class="card-body"> 
+                100
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-9 col-sm-8">
+            <div class="card-box">
+              <div class="card-title">This month</div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped mb-0">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <!-- <th>Time</th> -->
+                        <th>Attendance</th>
+                        <th>Updated By</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of attendance">
+                        <td>{{item.date | parseDate}}</td>
+                        <!-- <td>{{item.}}</td> -->
+                        <td>{{item.attendance}}</td>
+                        <!-- <td>{{item.createdBy}}</td> -->
+                        <td>Admin</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="emp_earning" class="tab-pane fade">
+        <div class="row">
+          <div class="col-lg-8 col-sm-8">            
+            <div class="row">
+              <div class="col-lg-12 col-sm-12">
+                  <div class="card-box">
+                      <div class="card-title">This month salary</div>
+                      <div class="card-body">
+                        <form #salaryCalcForm="ngForm" (ngSubmit)="saveSalary(salaryCalcForm.form)" validate>
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label>Total Days</label>
+                                    <input class="form-control" type="number" [(ngModel)]="salary.TotalDays"
+                                        name="TotalDays" #TotalDays="ngModel" readonly>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label>Base Salary</label>
+                                    <input class="form-control" type="number" [(ngModel)]="salary.BaseSalary"
+                                        name="BaseSalary" #BaseSalary="ngModel" readonly> 
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label>Calculated Salary</label>
+                                    <input class="form-control" type="number" [(ngModel)]="salary.MonthSalary"
+                                        name="MonthSalary" #MonthSalary="ngModel" readonly>
+                                  </div>
+                                </div>
+                          </div>
+                          <div class="row">                    
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label>Total Advance Taken</label>
+                                    <input class="form-control" type="number" [(ngModel)]="salary.AdvanceSalary"
+                                        name="AdvanceSalary" #AdvanceSalary="ngModel" readonly>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label>Final Salary</label>
+                                    <input class="form-control" type="number" [(ngModel)]="salary.FinalSalary"
+                                        name="FinalSalary" #FinalSalary="ngModel" readonly>
+                                  </div>
+                                </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+              </div>
+              
+              <div class="col-lg-12 col-sm-12">
+                  <div class="card-box">              
+                      <div class="card-title">Previous Salary</div>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-striped m-b-0">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Days</th>
+                                <th>Advance Taken</th>
+                                <th>Salary</th>                          
+                              </tr>
+                            </thead>
+                            <tbody>                        
+                                <tr>
+                                  <td>1</td>
+                                  <td>31/10/2019</td>
+                                  <td>31</td>
+                                  <td>1000</td>
+                                  <td>30000</td>                      
+                                </tr>                        
+                                <tr>
+                                  <td>2</td>
+                                  <td>30/09/2019</td>
+                                  <td>30</td>
+                                  <td>5000</td>
+                                  <td>25000</td>                      
+                                </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>         
+          
+          <div class="col-lg-4 col-sm-4">
+              <div class="card-box">
+                <div class="card-title">
+                  Advance 
+                  <div class="add-advance" title="Add advance amount">
+                    <a data-target="#add_advance_taken" data-toggle="modal" class="add-advance-icon">
+                      <i class="fa fa-pencil"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped m-b-0">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Amount Taken</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>10/11/2019</td>
+                          <td>2000</td>
+                        </tr>
+                        <tr>
+                          <td>15/11/2019</td>
+                          <td>1000</td>
+                        </tr>
+                        <tr>
+                          <td>20/11/2019</td>
+                          <td>2000</td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td>Total</td>
+                          <td>5000</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="add_advance_taken" class="modal fade center-modal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Add Advance Amount</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <form #addAdvanceForm="ngForm" (ngSubmit)="addAdvance(addAdvanceForm.form)" validate>
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Advance Date</label>
+                              <my-date-picker name="AdvanceDate" [options]="myDatePickerOptions" 
+                                [(ngModel)]="advance.AdvanceDate" #AdvanceDate='ngModel'></my-date-picker>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Advance Amount</label>
+                              <input class="form-control" type="number" [(ngModel)]="advance.AdvanceAmount"
+                                  name="AdvanceAmount" #AdvanceAmount="ngModel">
+                            </div>
+                          </div>
+                      </div>
+                      <div class="m-t-20 text-center">
+                          <button class="btn btn-primary" type="submit">Add Advance Amount</button>
+                      </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,9 @@
+table#tblAttendance > thead > tr > th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+table#tblAttendance > tbody > tr > td {
+    vertical-align: middle;
+    text-align: center;
+}

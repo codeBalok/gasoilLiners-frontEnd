@@ -1,0 +1,30 @@
+<div class="account-page">
+  <div class="container">
+    <h3 class="account-title">Login</h3>
+    <div class="account-box">
+      <div class="account-wrapper">
+        <div class="account-logo">
+          <a href="javascript:"><img src="assets/img/logo2.png" alt="Gas Oil Liner"></a>
+        </div>
+        <form #loginForm="ngForm" (ngSubmit)="doLogin(loginForm.form)">
+          <div class="form-group form-focus">
+            <label class="control-label">Username or Email</label>
+            <input class="form-control floating" type="text" [(ngModel)]="login.Username" name="Username"
+            #Username="ngModel">
+          </div>
+          <div class="form-group form-focus">
+            <label class="control-label">Password</label>
+            <input class="form-control floating" type="password" [(ngModel)]="login.Password" name="Password"
+            #Password="ngModel">
+          </div>
+          <div class="form-group text-center">
+            <button class="btn btn-primary btn-block account-btn" type="submit">Login</button>
+          </div>
+          <div class="form-group text-center">
+            <span class="error">{{errorMessage}}</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

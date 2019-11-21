@@ -1,0 +1,10 @@
+.content{padding:30px;}
+.view-icons .btn {
+    text-decoration: none;
+    background-color: #ffffff;
+    border:1px solid #e3e3e3;
+    border-radius: 5px;
+    min-width: 40px;
+    font-size: 18px;
+    padding: 4px;
+}
