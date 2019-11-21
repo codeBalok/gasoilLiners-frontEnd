@@ -1,0 +1,30 @@
+<div class="sidebar" id="sidebar" *ngIf="isLoggedIn$ | async as isLoggedIn">
+  <div class="sidebar-inner slimscroll-wrap" slimScroll [options]="opts">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <ul *ngIf="homeView">
+        <li [ngClass]="[url === 'dashboard'? 'active' : 'inactive',url === ''? 'active' : 'inactive']">
+          <a routerLink="dashboard"><i class="la la-dashboard"></i> <span> Dashboard </span></a>
+        </li>
+        <li class="submenu">
+          <a [ngClass]="url === 'employees'? 'subdrop' : 'null'"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
+          <ul class="list-unstyled" [ngClass]="url === 'employees'? 'submenu-block' : 'dsply-none'">
+            <li><a routerLink="employees/all-employees" [ngClass]="url2 === 'all-employees'? 'active' : 'null'">All Employees</a></li>
+            <li><a routerLink="employees/attendance" [ngClass]="url2 === 'attendance'? 'active' : 'null'">Attendance</a></li>
+          </ul>
+        </li>
+        <li [ngClass]="url === 'projects'? 'active' : 'null'">
+          <a routerLink="projects"><i class="la la-rocket"></i> <span> Projects </span> </a>
+        </li>
+        <li class="submenu">
+          <a [ngClass]="url === 'masters'? 'subdrop' : 'null'"><i class="la la-user"></i> <span> Masters</span> <span class="menu-arrow"></span></a>
+          <ul class="list-unstyled" [ngClass]="url === 'masters'? 'submenu-block' : 'dsply-none'">
+            <li><a routerLink="masters/employee-category" [ngClass]="url2 === 'employee-category'? 'active' : 'null'">Employee Category</a></li>
+            <li><a routerLink="masters/project-category" [ngClass]="url2 === 'project-category'? 'active' : 'null'">Project Category</a></li>
+          </ul>
+        </li>
+      </ul>      
+    </div>
+    <div class="cover-bar"></div>
+  </div>
+</div>
+

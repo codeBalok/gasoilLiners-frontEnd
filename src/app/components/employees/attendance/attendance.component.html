@@ -1,0 +1,73 @@
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <div class="row">
+      <div class="col-xs-4">
+        <h4 class="page-title">Attendance</h4>
+      </div>
+    </div>
+
+    <form #searchForm="ngForm" (ngSubmit)="searchEmployee(searchForm.form)">
+    <div class="row filter-row">
+        <div class="col-sm-3 col-xs-6">
+          <div class="form-group form-focus select-focus">
+            <label class="control-label">Project Name</label>
+            <select class="select floating form-control" [(ngModel)]="search.Project" name="Project"
+            #Project="ngModel">                
+                <option value="{{item.id}}" *ngFor="let item of projects">{{item.title}}</option>
+              </select>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <div class="form-group form-focus">
+            <label class="control-label">Employee Name</label>
+            <input type="text" class="form-control floating" [(ngModel)]="search.EmployeeName" name="EmployeeName"
+            #EmployeeName="ngModel" />
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <div class="form-group form-focus select-focus">
+            <label class="control-label">Designation</label>
+            <select class="select floating form-control"  [(ngModel)]="search.EmployeePosition" name="EmployeePosition"
+            #EmployeePosition="ngModel">
+              <option value="">All Roles</option>
+              <option value="Web Developer">Web Developer</option>
+              <option value="Web Designer">Web Designer</option>
+              <option value="Android Developer">Android Developer</option>
+              <option value="Ios Developer">Ios Developer</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <button class="btn btn-success btn-block" type="submit">Search</button>
+        </div>
+    </div>
+  </form>
+
+    <div class="row">
+        <div class="table-responsive">
+          <table class="table table-bordered mb-0">
+            <thead>
+              <tr>
+                <th>Card #</th>
+                <th>Employee Name</th>
+                <th>Position</th>
+                <th>Last 7 Days Attendance</th>
+                <th>Joining Date</th>
+                <th>Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let emp of employees">
+                <td>{{emp.employeeNumber}}</td>
+                <td>{{emp.name}}</td>
+                <td>{{emp.position}}</td>
+                <td></td>
+                <td>{{emp.startDate}}</td>
+                <td>{{emp.phone}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+</div>
