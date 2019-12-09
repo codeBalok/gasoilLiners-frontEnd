@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';  
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { NgSlimScrollModule, SLIMSCROLL_DEFAULTS } from 'ngx-slimscroll';
 import { MyDatePickerModule } from 'mydatepicker';
@@ -29,9 +28,6 @@ import { ViewDetailsComponent } from './components/employees/view-details/view-d
 
 import { ParseDate } from './pipe/parseDate.pipe';
 import { PayOutComponent } from './components/reports/pay-out/pay-out.component';
-import { LoaderComponent } from './components/loader/loader.component';
-import { LoaderService } from './services/loader.service';
-import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 
 @NgModule({
@@ -48,8 +44,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     LoginComponent,
     ViewDetailsComponent,
     ParseDate,
-    PayOutComponent,
-    LoaderComponent
+    PayOutComponent
   ],
   imports: [
     BrowserModule,
@@ -68,9 +63,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
   ],
   providers: [
     AuthService,
-    AuthGuard,
-    LoaderService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1190,10 +1190,15 @@ table.dataTable {
 }
 .dash-widget-icon {
 	background-color: #eee;
+<<<<<<< HEAD
 	/* background-color: #ff9b44; */
 	border-radius: 100%;
 	/* color: #777; */
 	color: #ff9b44;
+=======
+	border-radius: 100%;
+	color: #777;
+>>>>>>> f5c1827d38bb8c41e2a0569919ae28c5dbd5fe5f
 	display: inline-block;
 	float: left;
 	font-size: 30px;
@@ -1213,10 +1218,13 @@ table.dataTable {
 .dash-widget-info > span {
 	font-size: 16px;
 }
+<<<<<<< HEAD
 .dash-widget-action {
 	text-align: center;
 	margin-top: 15px;
 }
+=======
+>>>>>>> f5c1827d38bb8c41e2a0569919ae28c5dbd5fe5f
 
 /*-----------------
 	11. Activity

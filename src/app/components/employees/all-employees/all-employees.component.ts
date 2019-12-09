@@ -78,7 +78,6 @@ export class AllEmployeesComponent implements OnInit {
     inline: false,
     height: '38px'
   };
-
   public employee: IEmployee = {
     Address: '',
     Age: 0,

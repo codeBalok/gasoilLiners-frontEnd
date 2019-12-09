@@ -33,8 +33,8 @@ export class HeaderComponent implements OnInit {
   }
 
   onSidebarToggle() {
-  $(document).on('click','#toggle_btn', function() {
-    if($('body').hasClass('mini-sidebar')) {
+  $(document).on('click', '#toggle_btn', function() {
+    if ($('body').hasClass('mini-sidebar')) {
       $('body').removeClass('mini-sidebar');
       $('.user-info').removeClass('hidden');
       $('.subdrop + ul').slideDown();
