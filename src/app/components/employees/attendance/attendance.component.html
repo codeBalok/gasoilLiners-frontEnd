@@ -2,50 +2,56 @@
   <div class="content container-fluid">
     <div class="row">
       <div class="col-xs-4">
-        <h4 class="page-title">Attendance</h4>
+        <h4 class="page-title">Employee Daily Attendance</h4>
       </div>
     </div>
-
-    <form #searchForm="ngForm" (ngSubmit)="searchEmployee(searchForm.form)">
-    <div class="row filter-row">
-        <div class="col-sm-3 col-xs-6">
-          <div class="form-group form-focus select-focus">
-            <label class="control-label">Project Name</label>
-            <select class="select floating form-control" [(ngModel)]="search.Project" name="Project"
-            #Project="ngModel">                
+    <div class="card-box">
+      <div class="card-header">
+        <!-- If no project is selected show message-->
+        <div class="alert alert-primary show" role="alert" *ngIf="employees == null || employees.length == 0">
+          <strong>Select project to get list of project employees for attendance update.</strong>
+        </div>
+        <div class="row filter-row">
+          <div class="col-sm-3 col-xs-6">
+            <div class="form-group form-focus">
+              <label class="control-label">Project Name</label>
+              <select class="select floating form-control" [(ngModel)]="project" name="Project" #Project="ngModel"
+                (change)="searchEmployee()">
                 <option value="{{item.id}}" *ngFor="let item of projects">{{item.title}}</option>
               </select>
+            </div>
+          </div>
+          <div class="col-sm-3 col-xs-6">
+            <div class="form-group form-focus focused">
+              <label class="control-label">Date</label>
+              <input type="text" class="form-control floating" [disabled]="true" value="{{today | parseDate}}" />
+            </div>
+          </div>
+          <div class="col-sm-3 col-xs-6">
+            <div class="form-group form-focus focused">
+              <label class="control-label">Project Employee Count</label>
+              <input type="text" class="form-control floating" [disabled]="true" value="{{employeeCount}}" />
+            </div>
+          </div>
+          <div class="col-sm-2 col-xs-6">
+            <button class="btn btn-success btn-block" (click)="captureAttendance()"
+              [disabled]="isAttendanceDone">Save</button>
+          </div>
+          <div class="col-sm-1 col-xs-1">
+            <div class="dropdown profile-action">
+              <a href="javascript:" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                  class="fa fa-ellipsis-v"></i></a>
+              <ul class="dropdown-menu pull-right">
+                <li><a data-toggle="modal" data-target="#"><i class="fa fa-pencil m-r-5"></i>
+                    Make Unavailable </a></li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div class="col-sm-3 col-xs-6">
-          <div class="form-group form-focus">
-            <label class="control-label">Employee Name</label>
-            <input type="text" class="form-control floating" [(ngModel)]="search.EmployeeName" name="EmployeeName"
-            #EmployeeName="ngModel" />
-          </div>
-        </div>
-        <div class="col-sm-3 col-xs-6">
-          <div class="form-group form-focus select-focus">
-            <label class="control-label">Designation</label>
-            <select class="select floating form-control"  [(ngModel)]="search.EmployeePosition" name="EmployeePosition"
-            #EmployeePosition="ngModel">
-              <option value="">All Roles</option>
-              <option value="Web Developer">Web Developer</option>
-              <option value="Web Designer">Web Designer</option>
-              <option value="Android Developer">Android Developer</option>
-              <option value="Ios Developer">Ios Developer</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-sm-3 col-xs-6">
-          <button class="btn btn-success btn-block" type="submit">Search</button>
-        </div>
-    </div>
-  </form>
-
-    <div class="row">
-        <div class="table-responsive">
-<<<<<<< HEAD
+      </div>
+      <div class="card-body">
+        <!-- Project Employee Table starts-->
+        <div class="table-responsive" *ngIf="employees != null">
           <table class="table table-bordered mb-0" id="tblAttendance">
             <thead>
               <tr>
@@ -53,18 +59,14 @@
                 <th rowspan="2">Employee Name</th>
                 <th rowspan="2">Position</th>
                 <th colspan="7">Last 7 days Attendance</th>
-                <th>Today</th>
+                <th rowspan="2">Today</th>
                 <th colspan="3">Last 3 Months Attendance</th>
                 <th rowspan="2">Joining Date</th>
-                <th>Phone</th>
+                <th rowspan="2">Phone</th>
               </tr>
               <tr>
                 <th *ngFor="let d of dates">{{d}}</th>
-                <th><input type="checkbox" class="form-control"></th>
-                <th>Oct</th>
-                <th>Sept</th>
-                <th>Aug</th>
-                <th><button class="btn btn-success" (click)="captureAttendance()">Save</button></th>
+                <th *ngFor="let month of last3Months">{{month}}</th>
               </tr>
             </thead>
             <tbody>
@@ -72,41 +74,26 @@
                 <td>{{emp.employeeCode}} <span class="hidden Id-{{i}}">{{emp.projectEmployeeId}}</span></td>
                 <td>{{emp.employeeName}}</td>
                 <td>{{emp.position}}</td>
-                <td *ngFor="let att of emp.employeeAttendance">{{att.attendance}}</td>
+                <td *ngFor="let att of emp.employeeAttendance">
+                  <span class="attendance-dot" title="{{att.attendance}}" [ngClass]="{'attendance-dot-red' : att.attendance == 'A',
+                        'attendance-dot-green' : att.attendance == 'P', 'attendance-dot-yellow' : att.attendance == 'H'}"></span>
+                </td>
                 <td>
-                  <select class="select form-control Attendance-{{i}}" name="Attendance-{{i}}">
-                    <option *ngFor="let item of attendanceParams"  value="{{item}}">{{item}}</option>
+                  <select class="select form-control Attendance-{{i}}" name="Attendance-{{i}}" [disabled]="isAttendanceDone" [(ngModel)]="emp.todayAttendance">
+                    <option *ngFor="let item of attendanceParams" value="{{item}}">{{item}}</option>
                   </select>
                 </td>
                 <td>{{emp.month1Count}}</td>
                 <td>{{emp.month2Count}}</td>
                 <td>{{emp.month3Count}}</td>
                 <td>{{emp.startDate | parseDate}}</td>
-=======
-          <table class="table table-bordered mb-0">
-            <thead>
-              <tr>
-                <th>Card #</th>
-                <th>Employee Name</th>
-                <th>Position</th>
-                <th>Last 7 Days Attendance</th>
-                <th>Joining Date</th>
-                <th>Phone</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let emp of employees">
-                <td>{{emp.employeeNumber}}</td>
-                <td>{{emp.name}}</td>
-                <td>{{emp.position}}</td>
-                <td></td>
-                <td>{{emp.startDate}}</td>
->>>>>>> f5c1827d38bb8c41e2a0569919ae28c5dbd5fe5f
                 <td>{{emp.phone}}</td>
               </tr>
             </tbody>
           </table>
         </div>
+        <!-- Project Employee Table ends-->
+      </div>
     </div>
   </div>
 </div>

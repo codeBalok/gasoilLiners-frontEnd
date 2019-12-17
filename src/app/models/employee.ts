@@ -40,12 +40,12 @@ interface IEmployeeInfo {
     Salary: string;
   }
   export interface IEmployeeCategory  {
-    Id: number;
-    Category: string;
-    Description: string;
-    Status: number;
-    CreatedBy: number;
-    CreatedIp: string;
+    id: number;
+    category: string;
+    description: string;
+    status: number;
+    createdBy: number;
+    createdIp: string;
   }
   
   interface IEmployeeProject {

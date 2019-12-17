@@ -37,7 +37,7 @@
   
     .cover-bar {
       position: absolute;
-      background: #fff;
+      /* background: #fff; */
       height: 100%;  
       top: 0;
       right: 0;

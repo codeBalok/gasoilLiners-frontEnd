@@ -16,23 +16,24 @@ export class EmployeeCategoryComponent implements OnInit {
   constructor(private employeeService: EmployeeService) {}
 
   public rows: any = [];
+  public isListView = false;
 
   public addCategory: IEmployeeCategory = {
-    Category: '',
-    Description: '',
-    Status: 1,
-    Id: 0,
-    CreatedBy: 1,
-    CreatedIp: '0.0.0.1'
+    category: '',
+    description: '',
+    status: 1,
+    id: 0,
+    createdBy: 1,
+    createdIp: '0.0.0.1'
   };
 
   public editCategory: IEmployeeCategory = {
-    Category: '',
-    Description: '',
-    Status: 1,
-    Id: 0,
-    CreatedBy: 1,
-    CreatedIp: '0.0.0.1'
+    category: '',
+    description: '',
+    status: 1,
+    id: 0,
+    createdBy: 1,
+    createdIp: '0.0.0.1'
   };
 
   ngOnInit() {
@@ -49,12 +50,12 @@ export class EmployeeCategoryComponent implements OnInit {
   public createCategory(form: FormGroup): void {
     if (form.valid) {
       const obj: IEmployeeCategory = {
-        'Category': form.value.Category,
-        'Description': form.value.Description,
-        'Status': 1,
-        'CreatedBy': 1,
-        'Id': 0,
-        'CreatedIp': '0.0.0.1'
+        'category': form.value.Category,
+        'description': form.value.Description,
+        'status': 1,
+        'createdBy': 1,
+        'id': 0,
+        'createdIp': '0.0.0.1'
       };
       this.employeeService.postEmployeeCategory(obj).subscribe((data: any) => {
         form.reset();
@@ -71,14 +72,14 @@ export class EmployeeCategoryComponent implements OnInit {
   public updateCategory(form: FormGroup): void {
     if (form.valid) {
       const obj: IEmployeeCategory = {
-        'Category': form.value.Category,
-        'Description': form.value.Description,
-        'Status': 1,
-        'CreatedBy': 1,
-        'Id': form.value.Id,
-        'CreatedIp': '0.0.0.1'
+        'category': form.value.Category,
+        'description': form.value.Description,
+        'status': 1,
+        'createdBy': 1,
+        'id': form.value.Id,
+        'createdIp': '0.0.0.1'
       };
-      this.employeeService.putEmployeeCategory(obj.Id, obj).subscribe((data: any) => {
+      this.employeeService.putEmployeeCategory(obj.id, obj).subscribe((data: any) => {
         form.reset();
         $('#edit_category').modal('hide');
         this.getCategories();
@@ -86,21 +87,22 @@ export class EmployeeCategoryComponent implements OnInit {
     }
   }
 
-  public onDisable(item: IEmployeeCategory): void {
+  public onToggleCategory(item: IEmployeeCategory): void {
     this.editCategory = item;
   }
 
-  public disableCategory(): void {
+  public toggleCategory(): void {
     const obj: IEmployeeCategory = {
-      'Category': this.editCategory.Category,
-      'Description': this.editCategory.Description,
-      'Status': 0,
-      'CreatedBy': 1,
-      'Id': this.editCategory.Id,
-      'CreatedIp': '0.0.0.1'
+      'category': this.editCategory.category,
+      'description': this.editCategory.description,
+      'status': this.editCategory.status === 1 ? 0 : 1,
+      'createdBy': 1,
+      'id': this.editCategory.id,
+      'createdIp': '0.0.0.1'
     };
-    this.employeeService.putEmployeeCategory(obj.Id, obj).subscribe((data: any) => {
+    this.employeeService.putEmployeeCategory(obj.id, obj).subscribe((data: any) => {
       $('#disable_category').modal('hide');
+      $('#enable_category').modal('hide');
       this.getCategories();
     });
   }

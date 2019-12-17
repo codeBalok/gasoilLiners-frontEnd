@@ -17,3 +17,19 @@
     width: 26px;
 
 }
+
+.attendance-dot {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .attendance-dot-red {
+    background-color: red;
+  }
+  .attendance-dot-green {
+    background-color: green;
+  }
+  .attendance-dot-yellow {
+    background-color: yellow;
+  }

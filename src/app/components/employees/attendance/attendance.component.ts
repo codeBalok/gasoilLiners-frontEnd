@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { EmployeeService } from '../employees.service';
 import { ProjectService } from '../../projects/projects.service';
 import { IEmployeeAttendance } from 'src/app/models/employee';
+import { CommonService } from 'src/app/services/common.service';
 
 declare const $: any;
 
@@ -13,9 +14,11 @@ declare const $: any;
 })
 export class AttendanceComponent implements OnInit {
 
-  constructor(private employeeService: EmployeeService, private projectService: ProjectService) { }
+  constructor(private employeeService: EmployeeService, private projectService: ProjectService, private commonService: CommonService) { }
   private projects: [IProject];
+  public project: '';
   private dates = [];
+  private last3Months = [];
   public search = {
     'Project': 0,
     'EmployeeName': '',
@@ -24,17 +27,21 @@ export class AttendanceComponent implements OnInit {
   public empAttendance: IEmployeeAttendance[];
   public att: IEmployeeAttendance[];
   public employees: any;
+  public employeeCount = 0;
   private attendanceParams = [];
+  private isAttendanceDone = false;
+  private today = new Date();
 
   ngOnInit() {
     // for Floating Labels
     $('.floating').on('focus blur', function (e) {
       $(this).parents('.form-focus').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
-    }).trigger('blur');
+    });
 
     this.getProjects();
-    this.dates = this.Last7Days();
-    this.attendanceParams = this.attendance();
+    this.dates = this.commonService.Last7Days();
+    this.attendanceParams = this.commonService.attendance();
+    this.last3Months = this.commonService.Last3months();
   }
 
   // Get Projects
@@ -45,37 +52,27 @@ export class AttendanceComponent implements OnInit {
   }
 
   // Search Employee
-  public searchEmployee(form: FormGroup): void {
-    this.search =  {
-      'Project': Number(form.value.Project),
-      'EmployeeName': form.value.EmployeeName,
-      'EmployeePosition': form.value.EmployeePosition
+  public searchEmployee(): void {
+    this.search = {
+      'Project': Number(this.project),
+      'EmployeeName': '',
+      'EmployeePosition': ''
     };
     this.employeeService.searchEmployee(this.search).subscribe((data: any) => {
-      this.employees = data;
+      this.employees = data.attendance;
+      this.isAttendanceDone = (data.attendanceDone > 0) ? true : false;
+      if (!this.isAttendanceDone) {
+        this.employees.forEach(element => {
+          element.todayAttendance = 'P';
+        });
+      }
+      this.employeeCount = this.employees.length;
     });
-  }
-
-  // get last 7 days date in reverse order
-  public Last7Days () {
-    let result = [];
-    for (let i = 1; i < 8; i++) {
-        let d = new Date();
-        d.setDate(d.getDate() - i);
-        result.push(d.getDate() + '/' + (d.getMonth() + 1));
-    }
-    return result.reverse();
-  }
-
-  // get attendance parameters
-  public attendance() {
-    const attendaceParams = ['P', 'A', 'S', 'H', 'E', 'L', 'I', 'C', 'R'];
-    return attendaceParams;
   }
 
   public captureAttendance() {
     const arr = [];
-    $('#tblAttendance > tbody > tr').each(function(index, tr) {
+    $('#tblAttendance > tbody > tr').each(function (index, tr) {
       arr.push({
         Attendance: $(tr).find('.Attendance-' + index).val(),
         Date: new Date().toDateString(),
@@ -88,6 +85,7 @@ export class AttendanceComponent implements OnInit {
     // send data to api
     this.employeeService.postEmployeeAttendance(this.empAttendance).subscribe((data: any) => {
       console.log(data);
+      this.searchEmployee();
     });
   }
 }

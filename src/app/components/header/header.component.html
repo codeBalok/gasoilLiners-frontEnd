@@ -1,15 +1,10 @@
 <div *ngIf="isLoggedIn$ | async as isLoggedIn">
-<<<<<<< HEAD
   <div class="header-main">
-=======
-  <div class="header-main" *ngIf="url != 'pages'">
->>>>>>> f5c1827d38bb8c41e2a0569919ae28c5dbd5fe5f
       <div class="header-left">
           <a routerLink="dashboard" class="logo">
               <img src="assets/img/logo.png" width="40" height="40" alt="">
           </a>
       </div>
-<<<<<<< HEAD
       <a id="toggle_btn"><i class="fa fa-bars"></i></a>
       <div class="page-title-box pull-left">
           <h3>Gas Oil Liners</h3>
@@ -22,45 +17,18 @@
                   <span class="user-img"><img class="img-circle" src="assets/img/user-06.jpg" width="40" alt="Admin">
                   </span>
                   <span class="m-l-5">{{username$ | async}}</span>
-=======
-      <a [ngClass]="[url === 'inbox'?'dsply-none':'', url === 'calls'?'dsply-none':'', url === 'settings'?'dsply-none':'', url === 'chat'?'dsply-none':'']" id="toggle_btn" href="javascript:void(0);"><i class="la la-bars"></i></a>
-      <div class="page-title-box pull-left">
-          <!-- <h3>Gas Oil Liners</h3> -->
-      </div>
-      <a id="mobile_btn" class="mobile_btn pull-left" href="#sidebar"><i class="fa fa-bars" aria-hidden="true"></i></a>
-      <ul class="nav navbar-nav navbar-right user-menu pull-right">
-          
-          <li class="dropdown">
-              <a href="javascript:" class="dropdown-toggle user-link" data-toggle="dropdown" title="Admin">
-                  <span class="user-img"><img class="img-circle" src="assets/img/user.jpg" width="40" alt="Admin">
-                      <span class="status online"></span></span>
-                  <span class="m-l-5">Admin</span>
->>>>>>> f5c1827d38bb8c41e2a0569919ae28c5dbd5fe5f
                   <i class="caret m-l-5"></i>
               </a>
               <ul class="dropdown-menu">
                   <li><a routerLink="profile">My Profile</a></li>
-<<<<<<< HEAD
-=======
-                  <li><a routerLink="profile/edit">Edit Profile</a></li>
-                  <li><a routerLink="settings">Settings</a></li>
->>>>>>> f5c1827d38bb8c41e2a0569919ae28c5dbd5fe5f
                   <li><a (click)="onLogout()">Logout</a></li>
               </ul>
           </li>
       </ul>
       <div class="dropdown mobile-user-menu pull-right">
-<<<<<<< HEAD
           <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
           <ul class="dropdown-menu pull-right">
                   <li><a routerLink="profile">My Profile</a></li>
-=======
-          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-          <ul class="dropdown-menu pull-right">
-                  <li><a routerLink="profile">My Profile</a></li>
-                  <li><a routerLink="profile/edit">Edit Profile</a></li>
-                  <li><a routerLink="settings">Settings</a></li>
->>>>>>> f5c1827d38bb8c41e2a0569919ae28c5dbd5fe5f
                   <li><a (click)="onLogout()">Logout</a></li>
           </ul>
       </div>

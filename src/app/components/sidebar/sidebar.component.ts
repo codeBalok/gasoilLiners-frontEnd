@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
 import { ISlimScrollOptions } from 'ngx-slimscroll';
 import { Observable } from 'rxjs';
@@ -14,7 +14,7 @@ declare const $: any;
 export class SidebarComponent implements OnInit {
   private isLoggedIn$: Observable<boolean>;
   private username$: Observable<string>;
-  private slimScrollOptions: ISlimScrollOptions;
+  private opts: ISlimScrollOptions;
   private url = '';
   private url2 = '';
 
@@ -41,14 +41,14 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.username$ = this.authService.getUserName;
-    this.slimScrollOptions = {
+    this.opts = {
       barBackground: '#ccc',
       gridBackground: 'transparent',
       barOpacity: '0.4',
       barBorderRadius: '6',
       barWidth: '6',
       gridWidth: '0',
-      alwaysVisible: false,
+      alwaysVisible: true,
     };
     $(window).resize(function() {
       $('.slimscroll-wrapper').height($(window).height() - 60);

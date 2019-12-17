@@ -1,9 +1,26 @@
 table#tblAttendance > thead > tr > th {
     vertical-align: middle;
     text-align: center;
+    font-weight: bold;
 }
 
 table#tblAttendance > tbody > tr > td {
     vertical-align: middle;
     text-align: center;
 }
+
+.attendance-dot {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .attendance-dot-red {
+    background-color: red;
+  }
+  .attendance-dot-green {
+    background-color: green;
+  }
+  .attendance-dot-yellow {
+    background-color: yellow;
+  }

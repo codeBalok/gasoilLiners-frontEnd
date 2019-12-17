@@ -28,6 +28,7 @@ import { ViewDetailsComponent } from './components/employees/view-details/view-d
 
 import { ParseDate } from './pipe/parseDate.pipe';
 import { PayOutComponent } from './components/reports/pay-out/pay-out.component';
+import { ConfirmDialogComponent } from './components/layouts/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { PayOutComponent } from './components/reports/pay-out/pay-out.component'
     LoginComponent,
     ViewDetailsComponent,
     ParseDate,
-    PayOutComponent
+    PayOutComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

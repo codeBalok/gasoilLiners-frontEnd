@@ -14,7 +14,6 @@
     </div>
     <div class="row staff-grid-row">
       <div class="col-md-4 col-sm-4 col-xs-6 col-lg-3" *ngFor="let emp of rows">
-<<<<<<< HEAD
         <div class="profile-widget" (click)="employeeDetails(emp.id)" title="Click to view employee details">
           <div class="profile-img">
             <a><img class="avatar" src="assets/img/user.jpg" alt="_photo" /></a>
@@ -33,38 +32,6 @@
           <div class="m-b-15">
             <span class="title">Project : </span>
             <span class="text" *ngFor="let prjEmp of emp.projectEmployee">{{prjEmp.project.title}}</span>
-=======
-        <div class="profile-widget">
-          <div class="profile-img">
-            <a href=""><img class="avatar" src="assets/img/user.jpg" alt="_photo" /></a>
-          </div>
-          <h4 class="user-name m-t-10 m-b-0 text-ellipsis">
-            <a href="">{{emp.name}}</a>
-          </h4>
-          <div class="pro-deadline m-b-15">
-            <div class="sub-title">
-              Designation :
-            </div>
-            <div class="text-muted">
-              {{emp.categoryNavigation.category}}
-            </div>
-          </div>
-          <div class="pro-deadline m-b-15">
-            <div class="sub-title">
-              Employee Number :
-            </div>
-            <div class="text-muted">
-              {{emp.employeeNumber}}
-            </div>
-          </div>
-          <div class="pro-deadline m-b-15">
-            <div class="sub-title">
-              Project :
-            </div>
-            <div class="text-muted" *ngFor="let prjEmp of emp.projectEmployee">
-              {{prjEmp.project.title}}
-            </div>
->>>>>>> f5c1827d38bb8c41e2a0569919ae28c5dbd5fe5f
           </div>
         </div>
       </div>

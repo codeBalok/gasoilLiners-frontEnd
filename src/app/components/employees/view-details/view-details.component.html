@@ -137,7 +137,7 @@
           </div>
           <div class="col-lg-9 col-sm-8">
             <div class="card-box">
-              <div class="card-title">This month</div>
+              <div class="card-title">This month (Attendance as on {{today | parseDate}})</div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-striped mb-0">
@@ -153,7 +153,10 @@
                       <tr *ngFor="let item of attendance">
                         <td>{{item.date | parseDate}}</td>
                         <!-- <td>{{item.}}</td> -->
-                        <td>{{item.attendance}}</td>
+                        <td>
+                          <span class="attendance-dot" title="{{item.attendance}}" [ngClass]="{'attendance-dot-red' : item.attendance == 'A',
+                            'attendance-dot-green' : item.attendance == 'P', 'attendance-dot-yellow' : item.attendance == 'H'}"></span>
+                        </td>
                         <!-- <td>{{item.createdBy}}</td> -->
                         <td>Admin</td>
                       </tr>

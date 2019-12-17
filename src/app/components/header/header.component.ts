@@ -14,7 +14,6 @@ declare const $: any;
 })
 export class HeaderComponent implements OnInit {
   private isLoggedIn$: Observable<boolean>;
-  
   private username$: Observable<string>;
 
   constructor(private authService: AuthService) {}
@@ -22,8 +21,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
       this.isLoggedIn$ = this.authService.isLoggedIn;
       this.username$ = this.authService.getUserName;
-      console.log(this.authService.getUserName);
-      console.log(this.authService.isLoggedIn);
       this.onSidebarToggle();
       this.onMiniSidebarMouseover();
   }

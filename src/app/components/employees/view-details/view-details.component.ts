@@ -15,6 +15,7 @@ declare const $: any;
 })
 export class ViewDetailsComponent implements OnInit {
 
+  public today = new Date();
   private employee: any;
   private projects: any;
   private attendance: any;
@@ -66,7 +67,7 @@ export class ViewDetailsComponent implements OnInit {
   }
 
   public getAttendance(id: Number) {
-    this.employeeService.getEmployeeAtendance(id, 11).subscribe((data: any) =>  {
+    this.employeeService.getEmployeeAtendance(id, (new Date().getMonth() + 1)).subscribe((data: any) =>  {
       this.attendance = data;
     });
   }

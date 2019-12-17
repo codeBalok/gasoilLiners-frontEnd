@@ -23,7 +23,7 @@ export class EmployeeService  {
 
   // Put Employee Category
   public putEmployeeCategory(id: number, obj: IEmployeeCategory) {
-    return this.httpService.Put(this.employeeCategoryEndpoint.putEmployeeCategory + '/' + id, obj);
+    return this.httpService.Put(this.employeeCategoryEndpoint.putEmployeeCategory + id, obj);
   }
 
     // Get Employees

@@ -15,6 +15,7 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
+  redirectUrl = '';
   constructor(private router: Router) { }
 
   get getUserId(): Observable<string> {
@@ -29,7 +30,9 @@ export class AuthService {
       this.userId.next(user.id);
       this.userName.next(user.firstName + ' ' + user.lastName);
       this.loggedIn.next(true);
-      this.router.navigate(['/dashboard']);
+      if (this.redirectUrl === '') {
+        this.router.navigate(['/dashboard']);
+      } else {this.router.navigate([this.redirectUrl]); }
     } else { this.logout(); }
   }
   logout() {
