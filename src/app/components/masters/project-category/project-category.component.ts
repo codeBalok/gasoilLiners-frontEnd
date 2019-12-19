@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/services/http.service';
 import { FormGroup } from '@angular/forms';
 import { ProjectService } from '../../projects/projects.service';
 
@@ -94,23 +93,25 @@ export class ProjectCategoryComponent implements OnInit {
     }
   }
 
-  public onDisable(item: IProjectCategory): void {
+  public onToggleCategory(item: IProjectCategory): void {
     this.editCategory = item;
   }
 
-  public disableCategory(): void {
+  public toggleCategory(): void {
     const obj: IProjectCategory = {
       'name': this.editCategory.name,
       'description': this.editCategory.description,
-      'status': 0,
+      'status': this.editCategory.status === 1 ? 0 : 1,
       'createdBy': 1,
       'id': this.editCategory.id,
       'createdIp': '0.0.0.1'
     };
     this.projectService.putProjectCategory(obj.id, obj).subscribe((data: any) => {
       $('#disable_category').modal('hide');
+      $('#enable_category').modal('hide');
       this.getCategories();
     });
   }
+
 }
 
