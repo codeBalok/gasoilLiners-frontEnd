@@ -32,7 +32,7 @@
     "jquery": "^3.3.1",
     "line-awesome": "1.0.2",
     "material-icons": "^0.2.3",
-    "moment": "^2.23.0",
+    "moment": "^2.29.2",
     "morris.js": "^0.5.0",
     "mydatepicker": "^2.6.6",
     "ng-fullcalendar": "^1.7.1",
